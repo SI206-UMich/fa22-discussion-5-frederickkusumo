@@ -114,7 +114,7 @@ class TestAllMethods(unittest.TestCase):
 		w.add_item(self.item4)
 		self.assertEqual(w.get_max_price(), 6, "expecting 6")
 		w.add_item(Item("Sprite", 8, 200))
-		self.assertEqual(w.get_max_price(), 8, "expecting 6")
+		self.assertEqual(w.get_max_price(), 8, "expecting 8")
 		
 
 def main():
