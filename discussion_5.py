@@ -43,11 +43,15 @@ class Warehouse:
 
 	# Returns the item in the warehouse with the most stock		
 	def get_max_stock(self):
-		self.stock.max(self.items)
+		max = 0
+		for item in self.items:
+			if item.stock > max:
+				max = item.stock
+		return max
 	
 	# Returns the item in the warehouse with the highest price
 	def get_max_price(self):
-		self.price.max(self.items)	
+		pass
 
 
 
@@ -77,6 +81,10 @@ class TestAllMethods(unittest.TestCase):
 		self.assertEqual(len(w.items), 0, "expecting 0")
 		w.add_item(self.item1)
 		self.assertEqual(len(w.items), 1, "expecting 1")
+		w.add_item(self.item2)
+		self.assertEqual(len(w.items), 2, "expecting 2")
+		w.add_item(self.item3)
+		self.assertEqual(len(w.items), 3, "expecting 3")
 
 
 	## Check to see whether warehouse correctly returns the item with the most stock
@@ -85,7 +93,11 @@ class TestAllMethods(unittest.TestCase):
 		w.add_item(self.item1)
 		w.add_item(self.item2)
 		w.add_item(self.item3)
-		self.assertEqual(w.get_max_stock, 6, "expecting 6")
+		self.assertEqual(w.get_max_stock(), 100, "expecting 100")
+		w.add_item(self.item4)
+		self.assertEqual(w.get_max_stock(), 100, "expecting 100")
+		w.add_item(Item("Sprite", 8, 200))
+		self.assertEqual(w.get_max_stock(), 200, "expecting 200")
 
 
 	# Check to see whether the warehouse correctly return the item with the highest price
